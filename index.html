@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111a2c">
-  <meta name="description" content="黎怡捷 UI/UX 设计师作品集，按 01 至 43 页在线浏览。">
+  <meta name="description" content="黎怡捷 UI/UX 设计师作品集，按 01 至 48 页在线浏览。">
   <title>黎怡捷 · UI/UX 设计师作品集</title>
   <style>
     :root {
@@ -57,6 +57,61 @@
     .count { color: var(--muted); font-size: 12px; white-space: nowrap; }
     .progress { height: 2px; background: #202d43; }
     .progress span { display: block; width: 0; height: 100%; background: var(--accent); transition: width .15s ease; }
+    .section-nav {
+      position: fixed;
+      z-index: 4;
+      top: 50%;
+      left: 16px;
+      display: grid;
+      gap: 8px;
+      width: 148px;
+      padding: 10px;
+      border: 1px solid rgba(145, 165, 195, .2);
+      border-radius: 14px;
+      background: rgba(17, 26, 44, .92);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, .24);
+      backdrop-filter: blur(12px);
+      transform: translateY(-50%);
+    }
+    .section-tab {
+      display: flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 8px 10px;
+      border-color: transparent;
+      background: transparent;
+      color: var(--muted);
+      text-align: left;
+    }
+    .section-tab[aria-current="location"] {
+      border-color: rgba(85, 214, 176, .42);
+      background: rgba(85, 214, 176, .12);
+      color: var(--accent);
+    }
+    .section-name { font-size: 13px; font-weight: 650; white-space: nowrap; }
+    .back-top {
+      position: fixed;
+      z-index: 4;
+      right: 24px;
+      bottom: 24px;
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 44px;
+      min-height: 44px;
+      padding: 0;
+      border-color: rgba(85, 214, 176, .45);
+      border-radius: 12px;
+      background: rgba(17, 26, 44, .94);
+      color: var(--accent);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+    }
+    .back-top svg { display: block; width: 22px; height: 22px; overflow: visible; }
+    .back-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
     main { width: 100%; padding: 28px 16px 64px; }
     .pages { display: grid; justify-items: center; gap: 26px; }
     .page {
@@ -71,7 +126,7 @@
     .page figcaption {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       gap: 10px;
       min-height: 34px;
       padding: 7px 12px;
@@ -79,9 +134,10 @@
       font-size: 11px;
       letter-spacing: .08em;
     }
-    .page figcaption a { color: var(--accent); text-decoration: none; }
-    .page figcaption a:hover { text-decoration: underline; }
     .noscript { margin: 0 auto 20px; color: var(--muted); text-align: center; }
+    @media (min-width: 1200px) {
+      main { padding-left: 180px; }
+    }
     @media (max-width: 600px) {
       .toolbar { min-height: 58px; gap: 8px; padding-inline: 10px; }
       .brand h1 { font-size: 12px; }
@@ -92,6 +148,23 @@
       .count { font-size: 10px; }
       .optional { display: none; }
       main { padding: 12px 5px 32px; }
+      .section-nav {
+        top: auto;
+        right: 8px;
+        bottom: 8px;
+        left: 8px;
+        display: flex;
+        width: auto;
+        gap: 5px;
+        padding: 6px;
+        overflow-x: auto;
+        border-radius: 12px;
+        transform: none;
+      }
+      .section-tab { flex: 0 0 auto; min-height: 42px; padding: 6px 9px; }
+      .section-name { font-size: 11px; }
+      main { padding-bottom: 76px; }
+      .back-top { right: 14px; bottom: 68px; width: 46px; height: 40px; min-height: 40px; }
       .pages { gap: 12px; }
       .page { border-inline: 0; }
       .page figcaption { min-height: 28px; font-size: 10px; }
@@ -106,17 +179,27 @@
   <header class="toolbar">
     <div class="brand">
       <h1>黎怡捷 · UI/UX 设计师作品集</h1>
-      <p>PORTFOLIO · 01—43</p>
+      <p>PORTFOLIO · 01—48</p>
     </div>
     <nav class="controls" aria-label="作品集页码控制">
       <button id="previous" type="button" aria-label="上一页">上一页</button>
-      <input id="pageNumber" class="page-input" type="number" min="1" max="43" value="1" aria-label="跳转到页码">
-      <span class="count">/ 43</span>
+      <input id="pageNumber" class="page-input" type="number" min="1" max="48" value="1" aria-label="跳转到页码">
+      <span class="count">/ 48</span>
       <button id="next" type="button" aria-label="下一页">下一页</button>
       <button id="fullscreen" class="optional" type="button">全屏</button>
     </nav>
   </header>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  <nav class="section-nav" aria-label="作品集内容分类">
+    <button class="section-tab" type="button" data-start-page="1" aria-current="location"><span class="section-name">个人介绍</span></button>
+    <button class="section-tab" type="button" data-start-page="4"><span class="section-name">产品设计</span></button>
+    <button class="section-tab" type="button" data-start-page="16"><span class="section-name">AI辅助设计</span></button>
+    <button class="section-tab" type="button" data-start-page="27"><span class="section-name">可视化设计</span></button>
+    <button class="section-tab" type="button" data-start-page="38"><span class="section-name">视觉设计</span></button>
+  </nav>
+  <button id="backTop" class="back-top" type="button" aria-label="回到顶部" title="回到顶部">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 16.5 12 6.5l7.5 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <main>
     <noscript><p class="noscript">请开启浏览器 JavaScript 以浏览作品集页面。</p></noscript>
     <section id="pages" class="pages" aria-label="作品集页面"></section>
@@ -127,47 +210,52 @@
     const previous = document.querySelector("#previous");
     const next = document.querySelector("#next");
     const progressBar = document.querySelector("#progressBar");
+    const backTop = document.querySelector("#backTop");
+    const sectionTabs = [...document.querySelectorAll(".section-tab")];
     const figures = [];
 
-    for (let page = 1; page <= 43; page += 1) {
+    document.addEventListener("contextmenu", (event) => event.preventDefault());
+
+    for (let page = 1; page <= 48; page += 1) {
       const number = String(page).padStart(2, "0");
       const figure = document.createElement("figure");
       figure.className = "page";
       figure.id = `page-${number}`;
       figure.dataset.page = String(page);
 
-      const link = document.createElement("a");
-      link.href = `images/${number}.jpg`;
-      link.target = "_blank";
-      link.rel = "noopener";
-      link.setAttribute("aria-label", `在新标签页打开第 ${number} 页原图`);
-
       const image = document.createElement("img");
-      image.src = link.href;
+      image.src = `images/${number}.jpg`;
       image.alt = `黎怡捷 UI/UX 设计师作品集，第 ${number} 页`;
       image.width = 1920;
       image.loading = page <= 2 ? "eager" : "lazy";
       image.decoding = "async";
-      link.append(image);
+      image.draggable = false;
 
       const caption = document.createElement("figcaption");
       const label = document.createElement("span");
-      label.textContent = `${number} / 43`;
-      const original = document.createElement("a");
-      original.href = link.href;
-      original.target = "_blank";
-      original.rel = "noopener";
-      original.textContent = "打开原图 ↗";
-      caption.append(label, original);
-      figure.append(link, caption);
+      label.textContent = `${number} / 48`;
+      caption.append(label);
+      figure.append(image, caption);
       pagesRoot.append(figure);
       figures.push(figure);
     }
 
     function goTo(page) {
-      const safePage = Math.min(43, Math.max(1, Number(page) || 1));
+      const safePage = Math.min(48, Math.max(1, Number(page) || 1));
       figures[safePage - 1].scrollIntoView({ behavior: "smooth", block: "start" });
       pageInput.value = String(safePage);
+    }
+
+    sectionTabs.forEach((tab) => {
+      tab.addEventListener("click", () => goTo(Number(tab.dataset.startPage)));
+    });
+
+    function updateActiveSection(page) {
+      const activeTab = [...sectionTabs].reverse().find((tab) => page >= Number(tab.dataset.startPage));
+      sectionTabs.forEach((tab) => {
+        if (tab === activeTab) tab.setAttribute("aria-current", "location");
+        else tab.removeAttribute("aria-current");
+      });
     }
 
     previous.addEventListener("click", () => goTo(Number(pageInput.value) - 1));
@@ -180,6 +268,9 @@
       if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
       else await document.exitFullscreen?.();
     });
+    backTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 
     const observer = new IntersectionObserver((entries) => {
       const visible = entries
@@ -188,9 +279,11 @@
       if (!visible) return;
       const current = Number(visible.target.dataset.page);
       pageInput.value = String(current);
+      updateActiveSection(current);
+      backTop.classList.toggle("is-visible", current > 1);
       previous.disabled = current === 1;
-      next.disabled = current === 43;
-      progressBar.style.width = `${(current / 43) * 100}%`;
+      next.disabled = current === 48;
+      progressBar.style.width = `${(current / 48) * 100}%`;
     }, { threshold: [0.2, 0.5, 0.8] });
     figures.forEach((figure) => observer.observe(figure));
     previous.disabled = true;
